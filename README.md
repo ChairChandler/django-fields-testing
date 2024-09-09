@@ -64,9 +64,9 @@ To run tests, run script **run_tests.sh** inside **scripts** directory. It will 
 
 ## Building
 
-To build a package run **run_build.sh** inside **scripts** directory. It will generate **tar.gz** package file inside **dist** directory.
+To build a package run **run_build.sh** inside **scripts** directory. It will generate **whl** package file inside **dist** directory.
 
 ## Installation
 
 Being inside package base directory run
-> pip install dist/<red><package_name></red>.tar.gz
+> pip install dist/<red><package_name></red>.whl
