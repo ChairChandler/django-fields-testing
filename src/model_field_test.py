@@ -93,7 +93,6 @@ class ModelFieldTest:
             ]):
                 default_code = inspect.getsource(self.default)
                 field_code = inspect.getsource(self.field.default)
-                print(1, field_code)
                 assert field_code == default_code, \
                     f'''Expected method {self.default.__name__} for field default is not '''\
                     f'''equal real method {self.field.default.__name__}'''
