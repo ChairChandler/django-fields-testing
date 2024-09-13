@@ -67,7 +67,7 @@ class ModelFieldTest:
     verbose_name: str | None = None
     unique: bool | None = None
     max_length: int | None = None
-    validators: list[BaseValidator] | None = None
+    validators: list[BaseValidator | Callable] | None = None
     help_text: str | None = None
     null: bool | None = None
     blank: bool | None = None
