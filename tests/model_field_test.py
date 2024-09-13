@@ -82,6 +82,54 @@ def test_assert_attibute_invalid_field(invalid_field):
 
 #
 #
+# helpers
+#
+#
+
+
+@pytest.fixture
+def prepared_compare_codes_method():
+    return ModelFieldTest._compare_codes
+
+
+@ pytest.fixture
+def example_function_1():
+    def foo():
+        pass
+
+    return foo
+
+
+@ pytest.fixture
+def example_function_2():
+    def bar():
+        pass
+
+    return bar
+
+
+def test_compare_codes_same(
+    prepared_compare_codes_method,
+    example_function_1
+):
+    assert prepared_compare_codes_method(
+        example_function_1,
+        example_function_1
+    )
+
+
+def test_compare_codes_different(
+    prepared_compare_codes_method,
+    example_function_1,
+    example_function_2
+):
+    assert not prepared_compare_codes_method(
+        example_function_1,
+        example_function_2
+    )
+
+#
+#
 # getter
 #
 #
@@ -366,7 +414,7 @@ def empty_test_validators_method(prepared_test_validators_method):
 
 
 @ pytest.fixture
-def list_test_validators_method(prepared_test_validators_method):
+def list_test_validators_method_object(prepared_test_validators_method):
     v = [MagicMock(name='validator_1'), MagicMock(name='validator_2')]
     prepared_test_validators_method['mock'].validators = v
     prepared_test_validators_method['mock'].field.validators = v.copy()
@@ -374,10 +422,18 @@ def list_test_validators_method(prepared_test_validators_method):
 
 
 @ pytest.fixture
-def invalid_list_test_validators_method(list_test_validators_method):
-    list_test_validators_method['mock'].field.validators.pop()
-    print(list_test_validators_method['mock'].field.validators)
-    return list_test_validators_method
+def list_test_validators_method_function(prepared_test_validators_method):
+    def foo(): pass
+    v = [foo]
+    prepared_test_validators_method['mock'].validators = v
+    prepared_test_validators_method['mock'].field.validators = v.copy()
+    return prepared_test_validators_method
+
+
+@ pytest.fixture
+def invalid_list_test_validators_method(list_test_validators_method_object):
+    list_test_validators_method_object['mock'].field.validators.pop()
+    return list_test_validators_method_object
 
 
 def test_validators_empty_value(empty_test_validators_method):
@@ -388,12 +444,22 @@ def test_validators_empty_value(empty_test_validators_method):
     empty_test_validators_method['method']()
 
 
-def test_validators_in_list(list_test_validators_method):
+def test_validators_in_list_object(list_test_validators_method_object):
     '''
+    GIVEN validator is an object
     WHEN validators are in field validators
     THEN it pass
     '''
-    list_test_validators_method['method']()
+    list_test_validators_method_object['method']()
+
+
+def test_validators_in_list_function(list_test_validators_method_function):
+    '''
+    GIVEN validator is an function
+    WHEN validators are in field validators
+    THEN it pass
+    '''
+    list_test_validators_method_function['method']()
 
 
 def test_validators_not_in_list(invalid_list_test_validators_method):

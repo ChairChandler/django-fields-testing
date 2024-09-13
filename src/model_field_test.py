@@ -72,6 +72,13 @@ class ModelFieldTest:
     null: bool | None = None
     blank: bool | None = None
 
+    @staticmethod
+    def _compare_codes(func_a: Callable, func_b: Callable) -> bool:
+        "Verify if both functions have the same source codes."
+        code_a = inspect.getsource(func_a)
+        code_b = inspect.getsource(func_b)
+        return code_a == code_b
+
     @property
     def field(self) -> models.Field:
         "Gets model class field object."
@@ -91,9 +98,7 @@ class ModelFieldTest:
                 inspect.ismethod(self.default),
                 inspect.isfunction(self.default)
             ]):
-                default_code = inspect.getsource(self.default)
-                field_code = inspect.getsource(self.field.default)
-                assert field_code == default_code, \
+                assert ModelFieldTest._compare_codes(self.default, self.field.default), \
                     f'''Expected method {self.default.__name__} for field default is not '''\
                     f'''equal real method {self.field.default.__name__}'''
             # any other value
@@ -114,8 +119,15 @@ class ModelFieldTest:
     def test_validators(self):
         if self.validators is not None:
             for validator in self.validators:
-                assert validator in self.field.validators, \
-                    'Validator not exists in validators list'
+                if inspect.isfunction(validator):
+                    # we have to compare codes
+                    for fv in self.field.validators:
+                        assert ModelFieldTest._compare_codes(validator, fv), \
+                            'Validator not exists in validators list'
+
+                else:
+                    assert validator in self.field.validators, \
+                        'Validator not exists in validators list'
 
     @assert_attibute('help_text')
     def test_help_text(self): pass
