@@ -1,10 +1,10 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.11.6, pytest-8.3.2, pluggy-1.5.0
 rootdir: /home/alewandowski/Desktop/gitea/django-fields-testing
-collected 26 items
+collected 29 items
 
-tests/class_field_test.py ........                                       [ 30%]
-tests/meta_field_test.py ..                                              [ 38%]
-tests/model_field_test.py ................                               [100%]
+tests/class_field_test.py ........                                       [ 27%]
+tests/meta_field_test.py ..                                              [ 34%]
+tests/model_field_test.py ...................                            [100%]
 
-============================== 26 passed in 0.19s ==============================
+============================== 29 passed in 0.23s ==============================
