@@ -71,6 +71,8 @@ class ModelFieldTest:
     help_text: str | None = None
     null: bool | None = None
     blank: bool | None = None
+    to: models.Model | None = None
+    on_delete: Callable | None = None
 
     @staticmethod
     def _compare_codes(func_a: Callable, func_b: Callable) -> bool:
@@ -137,3 +139,9 @@ class ModelFieldTest:
 
     @assert_attibute('blank')
     def test_blank(self): pass
+
+    @assert_attibute('to')
+    def test_to(self): pass
+
+    @assert_attibute('on_delete')
+    def test_on_delete(self): pass

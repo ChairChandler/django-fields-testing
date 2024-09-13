@@ -190,7 +190,9 @@ def expected_attributes_wrapped_by_assert_attibute():
         'max_length',
         'help_text',
         'null',
-        'blank'
+        'blank',
+        'to',
+        'on_delete'
     }
 
 

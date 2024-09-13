@@ -3,10 +3,10 @@ Name                        Stmts   Miss  Cover   Missing
 src/__init__.py                 4      0   100%
 src/class_field_test.py        16      0   100%
 src/meta_field_test.py          6      0   100%
-src/model_field_test.py        68      0   100%
+src/model_field_test.py        74      0   100%
 tests/__init__.py               0      0   100%
 tests/class_field_test.py      84      0   100%
 tests/meta_field_test.py       32      0   100%
 tests/model_field_test.py     198      2    99%   98, 106
 ---------------------------------------------------------
-TOTAL                         408      2    99%
+TOTAL                         414      2    99%
