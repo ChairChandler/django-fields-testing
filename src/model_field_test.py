@@ -71,7 +71,7 @@ class ModelFieldTest:
     help_text: str | None = None
     null: bool | None = None
     blank: bool | None = None
-    to: models.Model | None = None
+    to: Any | None = None
     on_delete: Callable | None = None
 
     @staticmethod
