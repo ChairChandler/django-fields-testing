@@ -1,11 +1,5 @@
 # Description
 
-<style>
-  red {
-    color: red;
-  }
-</style>
-
 ## Overview
 
 Package allows to test django model fields, meta model fields and normal class fields by subclasing dedicated special classes and django test class.
